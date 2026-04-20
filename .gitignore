@@ -1,0 +1,32 @@
+Python
+
+pycache/
+*.pyc
+venv/
+.env
+
+Jupyter
+
+.ipynb_checkpoints/
+
+GIS data 
+
+*.tif
+*.tiff
+*.img
+*.shp
+*.dbf
+*.shx
+*.gpkg
+*.geojson
+
+Outputs
+
+outputs/
+data/processed/
+data/raw/
+
+OS files
+
+.DS_Store
+Thumbs.db
