@@ -1,27 +1,140 @@
-Problem Statement:
+# Problem Definition — Accessibility of Job Centers via P+R in Luxembourg
 
-With the population of Luxembourg City rising and the number of cross-border communters coming in by car, there is a lot of traffic in the city and importanly near business districts. 
-The commute time is a large factor in choosing a job, esepcially in traffic heavy condtions, thefore the use of P+R stops can reduce traffic.
-Therefore, finding the places which have the longest commute time, by bus, is imperative to undertanding where to put future P+R stops.
+## 1. Problem Statement
 
-Analytical question:
-Starting from a P+R stop, how long does it take someone to get from there to one of the business districts, using the AVL network, including the tram?
+Luxembourg City is experiencing increasing traffic congestion driven by population growth and a high volume of cross-border commuters traveling primarily by private car. This congestion is particularly pronounced in areas with high employment density, where demand for access is greatest.
 
-Method Overview:
-To answer this question, we will assume that the average person commutes 30-45 minutes, across the border, to one of the major P+R stops that the city provides. The P+R stops used wiht have P+R in the name and placed digitally. 
-We assume that once the individual reaches the P+R stops, they only walk or use the Bus and Tram  Network to get to their destination. The first stop in the given Luxembourg city quater will be used in this analysis.
-This question concerns cross-border commuters.
+Commute time is a critical determinant of job accessibility. Under peak-hour conditions, long and unreliable travel times reduce access to employment opportunities and contribute to inefficiencies in the transport system.
 
-In terms of quantifiable data, network analysis will be used to emasure the average travel time from the P+R stop to the first stop they reach within the quater. This includes walking and bus transfers.
-To do this, freqency weighted bus netwokr data is used. A static traffic netowrk at peak hours as well as a traffic level to average speed table will be used to find travel time.
+Park-and-Ride (P+R) infrastructure is designed to mitigate congestion by enabling commuters to switch from private vehicles to public transport at the urban periphery. However, the effectiveness of existing P+R facilities in providing efficient access to major employment centers is not well understood.
 
-Expected output:
-There will be two maps which first locate the P+R stops and then the business distrcits. From here, there will be tables detailing the average travel time for each buisness district as well as an isochrone map for each P+R stop.
-THis Isochrome will range from 15,20,30, and 45 minutes
+This project aims to evaluate the accessibility of high-employment-density business districts from existing P+R facilities using public transport, in order to identify spatial gaps and inform future transport planning decisions.
 
-Limitations:
-We assume the P+R stop is right next to the bus station. We must also assume that the bus speed scales with traffic. The average traffic will be taken and a estimated average spped table will be used to map traffic to avergae speed.
-We assume commuters come from the west or south since the majority of P+R stops are around that area of the city. We disregard normal parking lots. There is bias with the first stop method as well.
-We can use the isochrone map to get a better estimate but we can't get too precise.
+---
 
-A good result will allows us to see which business districts are currently inaccessible using the P+R stops. I will compare the results with the NPM 2035 which is a plan from the goverment regarding mobility.
+## 2. Analytical Question
+
+How long does it take for a commuter, starting from a P+R facility, to reach high-employment-density business districts using the public transport network (bus and tram) during peak hours?
+
+Accessibility will be measured using frequency-weighted travel times.
+
+---
+
+## 3. Method Overview
+
+### 3.1 Scope and Assumptions
+
+This analysis focuses on cross-border commuters entering Luxembourg City.
+
+* Commuters travel by car to P+R facilities (external travel time is assumed to be 30–45 minutes but is not explicitly modeled)
+* From the P+R onward, commuters rely exclusively on:
+
+  * Bus
+  * Tram
+  * Walking
+* Travel occurs during peak commuting hours
+* The transport network is modeled as a **static network**
+
+---
+
+### 3.2 Network Modeling
+
+A network-based accessibility analysis will be conducted using the AVL public transport network, including:
+
+* Bus routes
+* Tram lines
+* Walking connections
+* Transfer waiting times
+* Service frequency (used to compute frequency-weighted travel times)
+
+Travel times will be calculated using frequency-weighted shortest path methods.
+
+---
+
+### 3.3 Spatial Representation
+
+* **P+R locations**: All major facilities, digitized as point features
+* **Spatial units**: City quarters (polygon level)
+* **Destination representation**: Each business district is represented by a primary public transport stop within its corresponding quarter
+
+---
+
+### 3.4 Business District Definition
+
+Business districts are defined using employment data from STATEC.
+
+The process is as follows:
+
+* Employment density is calculated as jobs per unit area (jobs/km²)
+* Spatial units are ranked by employment density
+* The highest-density areas are identified
+* The top three employment density clusters are selected
+* Adjacent high-density units are aggregated to form continuous business district zones
+
+This ensures a data-driven and reproducible identification of major employment centers.
+
+---
+
+### 3.5 Accessibility Metric
+
+* Accessibility is measured using **frequency-weighted travel time**
+* Waiting times and transfers are explicitly included
+* Isochrone thresholds are defined at:
+
+  * 15 minutes
+  * 20 minutes
+  * 30 minutes
+  * 45 minutes
+
+---
+
+## 4. Expected Outputs
+
+The analysis will produce:
+
+* A map of P+R facilities and identified business districts
+* Isochrone maps (15, 20, 30, 45 minutes) for each P+R location
+* A travel time matrix between P+R facilities and business districts
+* Identification of business districts with the highest average travel times (i.e., lowest accessibility)
+
+---
+
+## 5. Assumptions and Limitations
+
+* P+R facilities are assumed to be directly connected to nearby public transport stops
+* The transport network is modeled as static and does not account for temporal variability
+* Public transport speeds are approximated using average values
+* Transfer waiting times are included but simplified
+* Business districts are represented by a single primary stop, introducing spatial generalization bias
+* The analysis focuses on commuters entering from the west and south, reflecting the distribution of P+R infrastructure
+* Standard parking options within the city are not considered
+
+---
+
+## 6. Success Criteria
+
+A successful analysis will:
+
+* Identify business districts with the highest travel times from P+R facilities
+* Reveal spatial inequalities in accessibility across Luxembourg City
+* Highlight gaps in the current P+R and public transport system
+* Provide insights that can be compared with national mobility strategies (e.g., NPM 2035)
+
+---
+
+## 7. Scope
+
+### Included
+
+* Public transport accessibility from P+R facilities
+* Peak-hour commuting conditions
+* Cross-border commuter flows
+* Network-based travel time analysis
+
+### Excluded
+
+* Job quality, salary, or employment type
+* Full door-to-door commute modeling outside the P+R system
+* Real-time or dynamic traffic modeling
+* Behavioral decision-making beyond modal shift at P+R facilities
+
