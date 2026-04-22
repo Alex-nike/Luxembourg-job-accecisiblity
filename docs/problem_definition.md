@@ -2,13 +2,13 @@
 
 ## 1. Problem Statement
 
-Luxembourg City is experiencing increasing traffic congestion driven by population growth and a high volume of cross-border commuters traveling primarily by private car. This congestion is particularly pronounced in areas with high employment density, where demand for access is greatest.
+Luxembourg city is susceptible towards an increase of congestion due to population growth and the use of private cars as a priamry mode of transport. This congestion is particularly pronounced in areas with high employment density, where demand for access is greatest.
 
-Commute time is a critical determinant of job accessibility. Under peak-hour conditions, long and unreliable travel times reduce access to employment opportunities and contribute to inefficiencies in the transport system.
+Commute time is a critical determinant of job accessibility and desirability. Under peak-hour conditions, long and unreliable travel times reduce access to employment opportunities and contribute to inefficiencies in the transport system. This is due to the net desirability of the long commute jobs being low.
 
 Park-and-Ride (P+R) infrastructure is designed to mitigate congestion by enabling commuters to switch from private vehicles to public transport at the urban periphery. However, the effectiveness of existing P+R facilities in providing efficient access to major employment centers is not well understood.
 
-This project aims to evaluate the accessibility of high-employment-density business districts from existing P+R facilities using public transport, in order to identify spatial gaps and inform future transport planning decisions.
+This project aims to evaluate the accessibility of high-employment-density business districts from existing P+R facilities using public transport, in order to identify spatial gaps and inform future transport planning decisions. Furthermore, the main goal of this project is to quantifiably asses the travel time from these P+R stops/
 
 ---
 
@@ -33,7 +33,7 @@ This analysis focuses on cross-border commuters entering Luxembourg City.
   * Tram
   * Walking
 * Travel occurs during peak commuting hours
-* The transport network is modeled as a **static network**
+* The transport network is modeled as a **static traffic network**
 
 ---
 
@@ -53,9 +53,9 @@ Travel times will be calculated using frequency-weighted shortest path methods.
 
 ### 3.3 Spatial Representation
 
-* **P+R locations**: All major facilities, digitized as point features
+* **P+R locations**: All major facilities, digitized as point features using open source map data. Major is defined by P+R points which have P+R in their name.
 * **Spatial units**: City quarters (polygon level)
-* **Destination representation**: Each business district is represented by a primary public transport stop within its corresponding quarter
+* **Destination representation**: Each business district stop is represented by the first public transport stop within its corresponding quarter that the comutter can get to withn the shortest time. The business districts themselves are quarters.
 
 ---
 
@@ -69,7 +69,7 @@ The process is as follows:
 * Spatial units are ranked by employment density
 * The highest-density areas are identified
 * The top three employment density clusters are selected
-* Adjacent high-density units are aggregated to form continuous business district zones
+* These density cluster are assigned quarters i.e. Kirchberg.
 
 This ensures a data-driven and reproducible identification of major employment centers.
 
@@ -103,10 +103,9 @@ The analysis will produce:
 
 * P+R facilities are assumed to be directly connected to nearby public transport stops
 * The transport network is modeled as static and does not account for temporal variability
-* Public transport speeds are approximated using average values
+* Public transport speeds are approximated using average values and are affected by traffic using a traffic to average speed function.
 * Transfer waiting times are included but simplified
 * Business districts are represented by a single primary stop, introducing spatial generalization bias
-* The analysis focuses on commuters entering from the west and south, reflecting the distribution of P+R infrastructure
 * Standard parking options within the city are not considered
 
 ---
