@@ -103,7 +103,7 @@ The analysis will produce:
 
 * P+R facilities are assumed to be directly connected to nearby public transport stops
 * The transport network is modeled as static and does not account for temporal variability
-* Public transport speeds are approximated using average values and are affected by traffic using a traffic to average speed function.
+* Public transport speeds are approximated using GTFS data under peak conditons
 * Transfer waiting times are included but simplified
 * Business districts are represented by a single primary stop, introducing spatial generalization bias
 * Standard parking options within the city are not considered
