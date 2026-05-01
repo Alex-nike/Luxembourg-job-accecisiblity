@@ -62,6 +62,7 @@ def save_mapping(mapping, output_path):
 
 
 def main():
+    #Change this line with your own path
     base_path = Path(r"C:\Users\luca\Downloads\Lux_public_transport_project")
 
     pr_file = base_path / "P+R_stations.gpkg"
